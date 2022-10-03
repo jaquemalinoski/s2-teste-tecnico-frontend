@@ -28,23 +28,23 @@ export const LeftPanel = () => {
     console.log(data)
   })
 
-  console.log(errors.value?.message)
+  console.log(errors)
 
   return (
   <div id="leftPanel">
     <h2>Simule sua Antecipação</h2>
     <form onSubmit={handleSimulation}>
-      <Input name='value' register={register} label='Informe o valor da venda *' placeholder='ex: R$1.000,00'/>
+      <Input isErrored={!!errors} name='value' register={register} label='Informe o valor da venda *' placeholder='ex: R$1.000,00'/>
       <span>{errors.value?.message}</span>
 
-      <Input name='installments' register={register} label='Número de parcelas *' placeholder='ex: 4'/>
+      <Input isErrored={!!errors} name='installments' register={register} label='Número de parcelas *' placeholder='ex: 4'/>
       <span>{errors.installments?.message}</span>
       <p>Máximo de 12 parcelas</p>
 
-      <Input name='mdr' register={register} label='Percentual de MDR *' placeholder='ex: 1.6'/>
+      <Input isErrored={!!errors} name='mdr' register={register} label='Percentual de MDR *' placeholder='ex: 1.6'/>
       <span>{errors.mdr?.message}</span>
 
-      <Input name='days' register={register} label='Dias a calcular *' placeholder='ex: 30, 40, 50, 60'/>
+      <Input isErrored={!!errors} name='days' register={register} label='Dias a calcular *' placeholder='ex: 30, 40, 50, 60'/>
       <span>{errors.days?.message}</span>
       <p>Separado por vírgula</p>
 

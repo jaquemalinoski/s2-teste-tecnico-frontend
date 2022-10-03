@@ -5,9 +5,17 @@
 
   input
     background: variables.$input-bg-color
-    border: 2px solid variables.$border-color
+    color: variables.$input-placeholder-color
+    border: 1px solid variables.$border-color
     border-radius: variables.$input-border-radius
     margin-top: 5px
     min-width: 100%
     padding: 10px
-  
+
+    &::placeholder
+      color: variables.$input-placeholder-color
+    
+    
+    // &::focus-within
+    //   border-color: red   
+    

@@ -5,9 +5,10 @@ interface InputProps {
   placeholder?: string
   name: string
   register: any
+  isErrored?: boolean
 }
 
-export const Input = ({placeholder, label, name, register}: InputProps) => {
+export const Input = ({placeholder, label, name, register, isErrored}: InputProps) => {
   return (
     <label id='label'>
       {label}
