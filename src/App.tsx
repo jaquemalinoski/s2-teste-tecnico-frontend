@@ -1,9 +1,10 @@
-
+import './styles/components/app.sass'
+import { Dashboard } from './pages/dashboard'
 
 function App() {
   return (
-    <div id="dashboard">
-      <h1>Teste</h1>
+    <div id="app">
+      <Dashboard/>
     </div>
   );
 }

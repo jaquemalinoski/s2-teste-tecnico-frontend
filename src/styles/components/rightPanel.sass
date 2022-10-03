@@ -1,0 +1,18 @@
+@use '../variables'
+
+#rightPanel
+  padding: 35px
+  border-top: 2px dotted variables.$border-color
+
+  @media screen and (min-width: 700px)
+    border-top: none
+    border-left: 2px dotted variables.$border-color
+
+    p
+      min-width: 200px
+
+  h4
+    margin-top: 10px
+
+  p
+    margin-top: 20px

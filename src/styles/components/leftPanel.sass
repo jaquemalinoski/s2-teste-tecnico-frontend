@@ -1,0 +1,37 @@
+@use '../variables'
+
+#leftPanel
+  padding: 35px
+
+  h2
+    margin-bottom: 15px
+
+  form 
+    display: flex
+    flex-direction: column
+
+    button
+      height: 40px
+      margin-top: 20px
+      background: variables.$border-color
+      border: 2px solid variables.$border-color
+      border-radius: variables.$input-border-radius
+      font-size: 16px
+
+      &:hover
+        background: variables.$btn-secondary-color
+        border: 2px solid variables.$border-color
+        cursor: pointer
+
+    %base-warnings
+      font-style: italic
+      font-size: 12px
+      margin-top: 5px
+
+    p
+      color: variables.$span-color
+      @extend %base-warnings
+
+    span
+      color: variables.$warning-color
+      @extend %base-warnings
