@@ -1,19 +1,8 @@
 import '../styles/components/rightPanel.sass'
 import { useSimulation } from '../providers/simulation' 
-import { useState } from 'react'
 
 export const RightPanel = () => {
   const { list } = useSimulation()
-  // const [arrayList, setArrayList] = useState<string[]>([])
-
-  // const renderSimulation = () => {
-  //   for (const [key, value] of Object.entries(list)) {
-  //     console.log(key + ' ' + value)
-
-  //     setArrayList([...arrayList, key[value]])
-  //   }
-  // }
-
     let one = Number(list[1]) / 100
     let fifteen = Number(list[15]) / 100
     let thirty = Number(list[30]) / 100

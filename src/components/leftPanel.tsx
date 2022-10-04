@@ -10,7 +10,6 @@ interface Simulation {
   amount: number
   installments: number
   mdr: number
-  // days: string
 }
 
 export const LeftPanel = () => {
@@ -20,7 +19,6 @@ export const LeftPanel = () => {
     amount: yup.number().typeError('Obrigatório valor numérico').required('Campo obrigatório***'),
     installments: yup.number().typeError('Obrigatório valor numérico').max(12, 'Máximo de 12 parcelas').required('Campo obrigatório***'),
     mdr: yup.number().typeError('Obrigatório valor numérico').required('Campo obrigatório***'),
-    // days: yup.string().typeError('Obrigatório valor numérico separado por vírgulas').required('Campo obrigatório***')
   })
 
   
@@ -29,17 +27,11 @@ export const LeftPanel = () => {
   })
   
   const handleSimulation = handleSubmit((data) => {
-    // data.days: Object<string> = data.days.split(',')
-    // // let arrayInt: Array<number> = arrayString.Select(lnq => int.Parse(lnq)).ToArray() 
-
-    console.log(data)
-
     api.post('', data, { headers: { 'Content-Type': 'application/json' }}
     ).then(response => setList(response.data))
     .catch((err) => console.log(err))      
   })
   
-  console.log(errors)
   return (
   <div id="leftPanel">
     <h2>Simule sua Antecipação</h2>
@@ -53,10 +45,6 @@ export const LeftPanel = () => {
 
       <Input name='mdr' register={register} label='Percentual de MDR *' placeholder='ex: 1 ou 1.6'/>
       <span>{errors.mdr?.message}</span>
-
-      {/* <Input isErrored={!!errors} name='days' register={register} label='Dias a calcular *' placeholder='ex: 30, 40, 50, 60'/>
-      <span>{errors.days?.message}</span>
-      <p>Separado por vírgula</p> */}
 
       <button type='submit'>Calcular</button>
     </form>
