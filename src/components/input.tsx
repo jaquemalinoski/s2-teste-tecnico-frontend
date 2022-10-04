@@ -8,7 +8,7 @@ interface InputProps {
   isErrored?: boolean
 }
 
-export const Input = ({placeholder, label, name, register, isErrored}: InputProps) => {
+export const Input = ({placeholder, label, name, register}: InputProps) => {
   return (
     <label id='label'>
       {label}

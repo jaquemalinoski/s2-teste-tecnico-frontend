@@ -1,52 +1,62 @@
 import { Input } from './input'
 import '../styles/components/leftPanel.sass'
-// import CurrencyInput from 'react-currency-input-field'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import api from '../services/api'
+import { useSimulation } from '../providers/simulation' 
 
 interface Simulation {
-  value: number
+  amount: number
   installments: number
   mdr: number
-  days: number
+  // days: string
 }
 
 export const LeftPanel = () => {
+  const { setList } = useSimulation()
+
   const simulationSchema = yup.object().shape({
-    value: yup.string().required('Campo obrigatório***'),
-    installments: yup.string().required('Campo obrigatório***'),
-    mdr: yup.string().required('Campo obrigatório***'),
-    days: yup.string().required('Campo obrigatório***')
+    amount: yup.number().typeError('Obrigatório valor numérico').required('Campo obrigatório***'),
+    installments: yup.number().typeError('Obrigatório valor numérico').max(12, 'Máximo de 12 parcelas').required('Campo obrigatório***'),
+    mdr: yup.number().typeError('Obrigatório valor numérico').required('Campo obrigatório***'),
+    // days: yup.string().typeError('Obrigatório valor numérico separado por vírgulas').required('Campo obrigatório***')
   })
 
+  
   const { register, handleSubmit, formState: { errors } } = useForm<Simulation>({
     resolver: yupResolver(simulationSchema)  
   })
-
+  
   const handleSimulation = handleSubmit((data) => {
+    // data.days: Object<string> = data.days.split(',')
+    // // let arrayInt: Array<number> = arrayString.Select(lnq => int.Parse(lnq)).ToArray() 
+
     console.log(data)
+
+    api.post('', data, { headers: { 'Content-Type': 'application/json' }}
+    ).then(response => setList(response.data))
+    .catch((err) => console.log(err))      
   })
-
+  
   console.log(errors)
-
   return (
   <div id="leftPanel">
     <h2>Simule sua Antecipação</h2>
     <form onSubmit={handleSimulation}>
-      <Input isErrored={!!errors} name='value' register={register} label='Informe o valor da venda *' placeholder='ex: R$1.000,00'/>
-      <span>{errors.value?.message}</span>
+      <Input name='amount' register={register} label='Informe o valor da venda *' placeholder='ex: R$1.000,00'/>
+      <span>{errors.amount?.message}</span>
 
-      <Input isErrored={!!errors} name='installments' register={register} label='Número de parcelas *' placeholder='ex: 4'/>
+      <Input name='installments' register={register} label='Número de parcelas *' placeholder='ex: 4'/>
       <span>{errors.installments?.message}</span>
       <p>Máximo de 12 parcelas</p>
 
-      <Input isErrored={!!errors} name='mdr' register={register} label='Percentual de MDR *' placeholder='ex: 1.6'/>
+      <Input name='mdr' register={register} label='Percentual de MDR *' placeholder='ex: 1 ou 1.6'/>
       <span>{errors.mdr?.message}</span>
 
-      <Input isErrored={!!errors} name='days' register={register} label='Dias a calcular *' placeholder='ex: 30, 40, 50, 60'/>
+      {/* <Input isErrored={!!errors} name='days' register={register} label='Dias a calcular *' placeholder='ex: 30, 40, 50, 60'/>
       <span>{errors.days?.message}</span>
-      <p>Separado por vírgula</p>
+      <p>Separado por vírgula</p> */}
 
       <button type='submit'>Calcular</button>
     </form>
