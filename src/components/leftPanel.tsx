@@ -20,7 +20,6 @@ export const LeftPanel = () => {
     installments: yup.number().typeError('Obrigatório valor numérico').max(12, 'Máximo de 12 parcelas').required('Campo obrigatório***'),
     mdr: yup.number().typeError('Obrigatório valor numérico').required('Campo obrigatório***'),
   })
-
   
   const { register, handleSubmit, formState: { errors } } = useForm<Simulation>({
     resolver: yupResolver(simulationSchema)  
